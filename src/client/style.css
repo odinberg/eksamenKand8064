@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+}
+
+#root {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+}
+
+header {
+  background-color: blue;
+}
+
+footer form {
+  display: flex;
+  align-items: stretch;
+}
+
+footer form input {
+  flex: 1;
+}
+
+main {
+  background-color: red;
+  overflow-y: auto;
+}
