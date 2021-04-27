@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 
-export function ChatView({ username, chatLog, onSendMessage, email }) {
+export function ChatView({
+  username,
+  chatLog,
+  onSendMessage,
+  email,
+  lastname,
+}) {
   const [message, setMessage] = useState("");
 
   function handleSubmit(e) {

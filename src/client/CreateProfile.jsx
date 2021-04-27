@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 
-export function Profile({ onUsername, onEmail, onLastname }) {
+export function CreateProfile({ onUsername, onEmail, onLastname }) {
   const [usernameField, setUsernameField] = useState("");
   const [lastnameField, setLastnameField] = useState("");
   const [emailField, setEmailField] = useState("");
 
-  function ProfilePage() {}
+  async function handleSubmit(e) {
+    e.preventDefault();
+    console.log("Submitting", { username, email, lastname });
+    await fetch("/api/profiles", {
+      method: "POST",
+      body: JSON.stringify({ username, email, lastname }),
+      headers: {
+        "Content-Type:": "application/json",
+      },
+    });
+  }
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        onUsername(usernameField);
-        onLastname(lastnameField);
-        onEmail(emailField);
-      }}
-    >
+    <form onSubmit={handleSubmit}>
       <h2>Enter your username, last name and email</h2>
       <input
         autoFocus={true}
