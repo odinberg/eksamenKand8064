@@ -13,21 +13,21 @@ function useSessionStorage(key) {
 }
 
 function App() {
-  const [username, setUsername] = useSessionStorage("username");
+  const [firstname, setFirstname] = useSessionStorage("firstname");
   const [email, setEmail] = useSessionStorage("email");
   const [lastname, setLastname] = useSessionStorage("lastname");
 
-  if (!username) {
+  if (!firstname) {
     return (
       <Profile
-        onUsername={setUsername}
+        onFirstname={setFirstname}
         onEmail={setEmail}
         onLastname={setLastname}
       />
     );
   }
 
-  return <ChatPage username={username} email={email} />;
+  return <ChatPage firstname={firstname} email={email} />;
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));

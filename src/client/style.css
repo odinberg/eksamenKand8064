@@ -9,9 +9,10 @@ body {
 }
 
 header {
-  background-color: blue;
+  background-color: dimgrey;
   display: grid;
-  grid-template-columns: 1.5fr 0.5fr;
+  grid-template-columns: 1fr 0.5fr 1fr;
+  border: 1px solid black;
 
 }
 

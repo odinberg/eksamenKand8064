@@ -1,28 +1,26 @@
 import React, { useState } from "react";
 
-export function Profile({ onUsername, onEmail, onLastname }) {
-  const [usernameField, setUsernameField] = useState("");
+export function Profile({ onFirstname, onEmail, onLastname }) {
+  const [firstnameField, setFirstnameField] = useState("");
   const [lastnameField, setLastnameField] = useState("");
   const [emailField, setEmailField] = useState("");
-
-  function ProfilePage() {}
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        onUsername(usernameField);
+        onFirstname(firstnameField);
         onLastname(lastnameField);
         onEmail(emailField);
       }}
     >
-      <h2>Enter your username, last name and email</h2>
+      <h2>Enter your first name, last name and email</h2>
       <input
         autoFocus={true}
-        placeholder={"username"}
+        placeholder={"first name"}
         type="text"
-        value={usernameField}
-        onChange={(e) => setUsernameField(e.target.value)}
+        value={firstnameField}
+        onChange={(e) => setFirstnameField(e.target.value)}
       />
 
       <input

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export function ChatView({ username, chatLog, onSendMessage, email }) {
+export function ChatView({ firstname, chatLog, onSendMessage, email }) {
   const [message, setMessage] = useState("");
 
   function handleSubmit(e) {
@@ -13,15 +13,15 @@ export function ChatView({ username, chatLog, onSendMessage, email }) {
     <>
       <header>
         <h1>Eksamen chat</h1>
-        <h3>Welcome {username}</h3>
-        <h2>Email: {email}</h2>
+        <h3>Welcome {firstname}</h3>
+        <h3>Email: {email}</h3>
       </header>
       <main>
         <h2>You can now chat...</h2>
         <div className={"chatLog"}>
-          {chatLog.map(({ id, username, message, email }) => (
+          {chatLog.map(({ id, firstname, message }) => (
             <div key={id} className={"message"}>
-              <strong>{username}:</strong> {message}
+              <strong>{firstname}:</strong> {message}
             </div>
           ))}
         </div>

@@ -27,10 +27,10 @@ export function ChatApp() {
     };
     ws.onmessage = (msg) => {
       console.log(msg);
-      const { username, email, message, id, lastname } = JSON.parse(msg.data);
+      const { firstname, email, message, id, lastname } = JSON.parse(msg.data);
       setChatLog((chatLog) => [
         ...chatLog,
-        { username, email, message, id, lastname },
+        { firstname, email, message, id, lastname },
       ]);
     };
   }
@@ -42,16 +42,16 @@ export function ChatApp() {
   }
   return { chatLog, sendMessage };
 }
-export function ChatPage({ username, email }) {
+export function ChatPage({ firstname, email }) {
   const { chatLog, sendMessage } = ChatApp();
 
   function handleSendMessage(message) {
-    sendMessage({ username, message, email });
+    sendMessage({ firstname, message, email });
   }
 
   return (
     <ChatView
-      username={username}
+      firstname={firstname}
       email={email}
       chatLog={chatLog}
       onSendMessage={handleSendMessage}
