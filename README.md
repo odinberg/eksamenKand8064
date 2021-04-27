@@ -4,4 +4,5 @@
 
 'npm install -D jest'
 'npm install -D babel-jest'
+'npm install -P react-router react-router-dom'
 

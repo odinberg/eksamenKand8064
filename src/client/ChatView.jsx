@@ -14,7 +14,7 @@ export function ChatView({ onSendMessage, chatLog }) {
       <header>
         <h1>Chat with friends</h1>
       </header>
-      <main>
+      <main id="chatWindow">
         <div id="chatLog">
           {chatLog.map((message, index) => (
             <div key={index}>{message}</div>

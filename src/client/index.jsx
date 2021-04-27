@@ -1,30 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
-import { ChatView } from "./ChatView";
+import { BrowserRouter, Link } from "react-router-dom";
+import { Route, Switch } from "react-router";
+import { ProfilePage } from "./ProfilePage";
+import { LoginPage } from "./LoginPage";
+import { ChatApp } from "./ChatApp";
 
-function ChatApp() {
-  const [chatLog, setChatLog] = useState([]);
-  const [ws, setWs] = useState();
-
-  useEffect(() => {
-    const ws = new WebSocket("ws://" + window.location.host);
-    ws.onopen = (event) => {
-      console.log("opened", event);
-    };
-
-    ws.onmessage = (event) => {
-      console.log("From server", event);
-      setChatLog((chatLog) => [...chatLog, event.data]);
-    };
-    ws.onclose = (event) => {
-      console.log("close", event);
-    };
-    setWs(ws);
-  }, []);
-
+function FrontPage() {
   return (
-    <ChatView chatLog={chatLog} onSendMessage={(message) => ws.send(message)} />
+    <div>
+      <h1>Welcome</h1>
+      <ul>
+        <li>
+          <Link to="/profile">Profile page</Link>
+        </li>
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+      </ul>
+    </div>
   );
 }
 
-ReactDOM.render(<ChatApp />, document.getElementById("root"));
+function Application() {
+  return (
+    <BrowserRouter>
+      <header>
+        <Link to="/">Front page</Link>
+      </header>
+      <Switch>
+        <Route location="/profile">
+          <ProfilePage />
+        </Route>
+        <Route location="/login">
+          <LoginPage />
+        </Route>
+        <Route exact location="/">
+          <FrontPage />
+        </Route>
+        <Route>
+          <h1>Page not found</h1>
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
+}
+
+ReactDOM.render(<Application />, document.getElementById("root"));
