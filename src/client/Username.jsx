@@ -14,7 +14,7 @@ export function Username({ onUsername }) {
         autoFocus={true}
         type="text"
         value={usernameField}
-        onChange={(event) => setUsernameField(e.target.value)}
+        onChange={(e) => setUsernameField(e.target.value)}
       />
       <button>Submit</button>
     </form>

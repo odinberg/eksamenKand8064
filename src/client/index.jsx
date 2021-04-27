@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { ChatApp } from "./ChatApp";
+
 import { Username } from "./Username";
+import { ChatApp, ChatPage } from "./ChatApp";
 
 function useSessionStorage(key) {
   const [value, setValue] = useState(sessionStorage.getItem(key));
@@ -18,7 +19,7 @@ function App() {
     return <Username onUsername={setUsername} />;
   }
 
-  return <ChatApp username={username} />;
+  return <ChatPage username={username} />;
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));

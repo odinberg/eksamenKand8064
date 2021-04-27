@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ChatView } from "./ChatView";
 
 export function ChatApp() {
   const [chatLog, setChatLog] = useState([]);
@@ -14,8 +13,10 @@ export function ChatApp() {
       console.log("Opened", event);
       connected.current = true;
     };
-    ws.onclose = (event) => {
+    ws.onclose = () => {
       if (connected.current) {
+        setTimeout(connect, 1000);
+      } else {
         setTimeout(connect, 1000);
       }
       connected.current = false;
@@ -40,7 +41,7 @@ export function ChatApp() {
 export function ChatPage({ username }) {
   const { chatLog, sendMessage } = ChatApp();
 
-  function handleSendMessage() {
+  function handleSendMessage(message) {
     sendMessage({ username, message });
   }
 
@@ -68,6 +69,7 @@ export function ChatView({ username, chatLog, onSendMessage }) {
         <h1>Eksamen chat</h1>
       </header>
       <main>
+        <h2>Chat started...</h2>
         <div>Welcome {username}</div>
         <div className={"chatLog"}>
           {chatLog.map(({ id, username, message }) => (
