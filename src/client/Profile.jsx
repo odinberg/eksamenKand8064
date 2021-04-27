@@ -4,6 +4,9 @@ export function Profile({ onUsername, onEmail, onLastname }) {
   const [usernameField, setUsernameField] = useState("");
   const [lastnameField, setLastnameField] = useState("");
   const [emailField, setEmailField] = useState("");
+
+  function ProfilePage() {}
+
   return (
     <form
       onSubmit={(e) => {

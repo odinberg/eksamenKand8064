@@ -13,7 +13,8 @@ export function ChatView({ username, chatLog, onSendMessage, email }) {
     <>
       <header>
         <h1>Eksamen chat</h1>
-        <div>Welcome {username}</div>
+        <h3>Welcome {username}</h3>
+        <h2>Email: {email}</h2>
       </header>
       <main>
         <h2>You can now chat...</h2>

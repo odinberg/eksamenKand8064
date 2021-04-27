@@ -42,11 +42,11 @@ export function ChatApp() {
   }
   return { chatLog, sendMessage };
 }
-export function ChatPage({ username }) {
-  const { chatLog, sendMessage, email } = ChatApp();
+export function ChatPage({ username, email }) {
+  const { chatLog, sendMessage } = ChatApp();
 
   function handleSendMessage(message) {
-    sendMessage({ username, message });
+    sendMessage({ username, message, email });
   }
 
   return (

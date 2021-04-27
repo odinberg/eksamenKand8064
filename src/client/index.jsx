@@ -17,7 +17,7 @@ function App() {
   const [email, setEmail] = useSessionStorage("email");
   const [lastname, setLastname] = useSessionStorage("lastname");
 
-  if ((!username, !email, !lastname)) {
+  if (!username) {
     return (
       <Profile
         onUsername={setUsername}
@@ -27,7 +27,7 @@ function App() {
     );
   }
 
-  return <ChatPage username={username} />;
+  return <ChatPage username={username} email={email} />;
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));
