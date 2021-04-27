@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
-import { Username } from "./Username";
-import { ChatApp, ChatPage } from "./ChatApp";
+import { Profile } from "./Profile";
+import { ChatPage } from "./ChatApp";
 
 function useSessionStorage(key) {
   const [value, setValue] = useState(sessionStorage.getItem(key));
@@ -14,9 +14,17 @@ function useSessionStorage(key) {
 
 function App() {
   const [username, setUsername] = useSessionStorage("username");
+  const [email, setEmail] = useSessionStorage("email");
+  const [lastname, setLastname] = useSessionStorage("lastname");
 
-  if (!username) {
-    return <Username onUsername={setUsername} />;
+  if ((!username, !email, !lastname)) {
+    return (
+      <Profile
+        onUsername={setUsername}
+        onEmail={setEmail}
+        onLastname={setLastname}
+      />
+    );
   }
 
   return <ChatPage username={username} />;

@@ -13,10 +13,12 @@ const wsServer = new ws.Server({ noServer: true });
 wsServer.on("connection", (socket) => {
   sockets.push(socket);
   socket.on("message", (msg) => {
-    const { username, message } = JSON.parse(msg);
+    const { username, message, email, lastname } = JSON.parse(msg);
     const id = index++;
     for (const recipient of sockets) {
-      recipient.send(JSON.stringify({ id, username, message }));
+      recipient.send(
+        JSON.stringify({ id, username, message, email, lastname })
+      );
     }
   });
 });

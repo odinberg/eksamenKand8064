@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { ChatView } from "./ChatView";
 
 export function ChatApp() {
   const [chatLog, setChatLog] = useState([]);
@@ -26,8 +27,11 @@ export function ChatApp() {
     };
     ws.onmessage = (msg) => {
       console.log(msg);
-      const { username, message, id } = JSON.parse(msg.data);
-      setChatLog((chatLog) => [...chatLog, { username, message, id }]);
+      const { username, email, message, id, lastname } = JSON.parse(msg.data);
+      setChatLog((chatLog) => [
+        ...chatLog,
+        { username, email, message, id, lastname },
+      ]);
     };
   }
 
@@ -39,7 +43,7 @@ export function ChatApp() {
   return { chatLog, sendMessage };
 }
 export function ChatPage({ username }) {
-  const { chatLog, sendMessage } = ChatApp();
+  const { chatLog, sendMessage, email } = ChatApp();
 
   function handleSendMessage(message) {
     sendMessage({ username, message });
@@ -48,47 +52,9 @@ export function ChatPage({ username }) {
   return (
     <ChatView
       username={username}
+      email={email}
       chatLog={chatLog}
       onSendMessage={handleSendMessage}
     />
-  );
-}
-
-export function ChatView({ username, chatLog, onSendMessage }) {
-  const [message, setMessage] = useState("");
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    onSendMessage(message);
-    setMessage("");
-  }
-
-  return (
-    <>
-      <header>
-        <h1>Eksamen chat</h1>
-      </header>
-      <main>
-        <h2>Chat started...</h2>
-        <div>Welcome {username}</div>
-        <div className={"chatLog"}>
-          {chatLog.map(({ id, username, message }) => (
-            <div key={id} className={"message"}>
-              <strong>{username}:</strong> {message}
-            </div>
-          ))}
-        </div>
-      </main>
-      <footer>
-        <form onSubmit={handleSubmit}>
-          <input
-            autoFocus={true}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          />
-          <button>Send</button>
-        </form>
-      </footer>
-    </>
   );
 }

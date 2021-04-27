@@ -10,6 +10,9 @@ body {
 
 header {
   background-color: blue;
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr;
+
 }
 
 footer form {
@@ -22,6 +25,6 @@ footer form input {
 }
 
 main {
-  background-color: red;
+  background-color: slategrey;
   overflow-y: auto;
 }
