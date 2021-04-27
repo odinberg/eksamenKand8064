@@ -1,30 +1,24 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { ChatView } from "./ChatView";
+import { ChatApp } from "./ChatApp";
+import { Username } from "./Username";
 
-function ChatApp() {
-  const [chatLog, setChatLog] = useState([]);
-  const [ws, setWs] = useState();
-
+function useSessionStorage(key) {
+  const [value, setValue] = useState(sessionStorage.getItem(key));
   useEffect(() => {
-    const ws = new WebSocket("ws://" + window.location.host);
-    ws.onopen = (event) => {
-      console.log("opened", event);
-    };
-
-    ws.onmessage = (event) => {
-      console.log("From server", event);
-      setChatLog((chatLog) => [...chatLog, event.data]);
-    };
-    ws.onclose = (event) => {
-      console.log("close", event);
-    };
-    setWs(ws);
-  }, []);
-
-  return (
-    <ChatView chatLog={chatLog} onSendMessage={(message) => ws.send(message)} />
-  );
+    sessionStorage.setItem(key, value);
+  }, [value]);
+  return [value, setValue];
 }
 
-ReactDOM.render(<ChatApp />, document.getElementById("root"));
+function App() {
+  const [username, setUsername] = useSessionStorage("username");
+
+  if (!username) {
+    return <Username onUsername={setUsername} />;
+  }
+
+  return <ChatApp username={username} />;
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));

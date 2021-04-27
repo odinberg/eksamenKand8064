@@ -3,16 +3,20 @@ const path = require("path");
 const ws = require("ws");
 
 const app = express();
+
 app.use(express.static(path.resolve(__dirname, "..", "..", "dist")));
 
-const wsServer = new ws.Server({ noServer: true });
+let index = 0;
 const sockets = [];
+const wsServer = new ws.Server({ noServer: true });
 wsServer.on("connection", (socket) => {
   console.log("Client connected");
   sockets.push(socket);
-  socket.on("message", (message) => {
+  socket.on("message", (msg) => {
+    const { username, message } = JSON.parse(msg);
+    const id = index++;
     for (const socket of sockets) {
-      socket.send("From server: " + message);
+      socket.send(JSON.stringify({ id, username, message }));
     }
   });
 });
